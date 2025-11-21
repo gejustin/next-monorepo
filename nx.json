@@ -10,6 +10,7 @@
     ],
     "sharedGlobals": []
   },
+  "defaultProject": "learning-monorepo-poc",
   "plugins": [
     {
       "plugin": "@nx/js/typescript",
