@@ -23,10 +23,13 @@
     "paths": {
       "@/*": [
         "./*"
-      ]
+      ],
+      "@learning-monorepo-poc/ui": ["../../libs/ui/src/index.ts"],
+      "@learning-monorepo-poc/learning-core": ["../../libs/learning-core/src/index.ts"],
+      "@learning-monorepo-poc/modules-onboarding-101": ["../../modules/onboarding-101/src/index.ts"],
+      "@learning-monorepo-poc/modules-security-basics": ["../../modules/security-basics/src/index.ts"]
     },
-    "outDir": "dist",
-    "rootDir": "."
+    "outDir": "dist"
   },
   "include": [
     "app/**/*.ts",
@@ -46,5 +49,19 @@
     "app/**/*.spec.ts",
     "app/**/*.test.ts",
     ".next"
+  ],
+  "references": [
+    {
+      "path": "../../libs/ui"
+    },
+    {
+      "path": "../../modules/security-basics"
+    },
+    {
+      "path": "../../modules/onboarding-101"
+    },
+    {
+      "path": "../../libs/learning-core"
+    }
   ]
 }

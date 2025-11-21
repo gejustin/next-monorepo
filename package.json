@@ -4,19 +4,29 @@
   "license": "MIT",
   "private": true,
   "packageManager": "yarn@4.11.0",
+  "scripts": {
+    "build": "nx build",
+    "start": "nx start",
+    "dev": "nx dev",
+    "typecheck": "nx typecheck"
+  },
   "dependencies": {
     "next": "~16.0.1",
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0"
+    "react": "18.3.1",
+    "react-dom": "18.3.1"
   },
   "devDependencies": {
+    "@babel/core": "^7.14.5",
+    "@babel/preset-react": "^7.14.5",
     "@nx/js": "22.1.0",
     "@nx/next": "22.1.0",
+    "@nx/react": "22.1.0",
     "@nx/workspace": "22.1.0",
     "@swc-node/register": "~1.9.1",
     "@swc/cli": "~0.6.0",
     "@swc/core": "~1.5.7",
     "@swc/helpers": "~0.5.11",
+    "@types/node": "^20.0.0",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
     "autoprefixer": "10.4.13",
@@ -27,6 +37,8 @@
     "typescript": "~5.9.2"
   },
   "workspaces": [
-    "apps/*"
+    "apps/*",
+    "libs/*",
+    "modules/*"
   ]
 }

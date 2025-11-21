@@ -5,6 +5,18 @@
   "references": [
     {
       "path": "./apps/learning-monorepo-poc"
+    },
+    {
+      "path": "./libs/ui"
+    },
+    {
+      "path": "./libs/learning-core"
+    },
+    {
+      "path": "./modules/security-basics"
+    },
+    {
+      "path": "./modules/onboarding-101"
     }
   ]
 }
