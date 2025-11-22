@@ -8,7 +8,8 @@
     "build": "nx build",
     "start": "nx start",
     "dev": "nx dev",
-    "typecheck": "nx typecheck"
+    "typecheck": "nx typecheck",
+    "create-module": "nx g @learning-monorepo-poc/workspace:module"
   },
   "dependencies": {
     "@nx/devkit": "22.1.0",

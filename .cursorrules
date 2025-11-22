@@ -1,0 +1,80 @@
+# Cursor Rules for Learning Monorepo POC
+
+## Module Creation and Content Implementation
+
+When creating or implementing content for a test module, follow these guidelines:
+
+### Module Structure
+
+Each module in `modules/<module-name>/` has:
+- `src/lib/module.tsx` - Server component entry point (no "use client")
+- `src/lib/client-module.tsx` - Client component for interactive UI ("use client")
+- `src/index.ts` - Exports the Module component
+
+### Creating Module Content
+
+When implementing module content:
+
+1. **Server Component (`module.tsx`)**:
+   - Must be a server component (no "use client" directive)
+   - Named export: `export async function Module()`
+   - Takes NO props
+   - Can call server-only code (databases, APIs, file system, etc.)
+   - Should fetch data and pass it to ClientModule if needed
+   - Renders `<ClientModule />` for interactive UI
+
+2. **Client Component (`client-module.tsx`)**:
+   - Must have `"use client"` directive at the top
+   - Named export: `export function ClientModule()`
+   - Can use React hooks (useState, useEffect, etc.)
+   - Can handle user interactions (clicks, form submissions, etc.)
+   - Can use UI components from `@learning-monorepo-poc/ui`
+   - Should be the main interactive UI for the module
+
+3. **Styling**:
+   - Use Tailwind CSS classes
+   - Import UI components from `@learning-monorepo-poc/ui` (Button, Card, etc.)
+   - Follow existing module patterns for consistency
+
+### Module Registry
+
+Modules are automatically registered in `apps/learning-monorepo-poc/app/[locale]/projects/module-registry.ts` when created with `yarn create-module`. The registry maps module slugs to lazy-loaded module components.
+
+### Best Practices
+
+- Keep server components focused on data fetching and server-side logic
+- Keep client components focused on interactivity and UI state
+- Use TypeScript for type safety
+- Follow the existing module structure and naming conventions
+- Test modules by navigating to `/projects/<module-name>` in the dev server
+
+### Example Module Pattern
+
+```tsx
+// module.tsx (Server Component)
+import { ClientModule } from "./client-module";
+
+export async function Module() {
+  // Fetch data, call APIs, etc.
+  const data = await fetchSomeData();
+
+  return <ClientModule initialData={data} />;
+}
+
+// client-module.tsx (Client Component)
+"use client";
+
+import { Card, Button } from "@learning-monorepo-poc/ui";
+
+export function ClientModule({ initialData }) {
+  const [state, setState] = useState(initialData);
+
+  return (
+    <Card className="p-6">
+      <h1>Module Title</h1>
+      <Button onClick={() => setState(...)}>Interact</Button>
+    </Card>
+  );
+}
+```
+
