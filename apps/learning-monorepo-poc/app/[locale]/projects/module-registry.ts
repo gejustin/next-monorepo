@@ -19,7 +19,6 @@ import type { ComponentType } from "react";
  * 5. Add a lazy import here and add it to the registry
  */
 export const moduleRegistry: Record<string, () => Promise<{ Module: ComponentType }>> = {
-  "onboarding-101": () => import("@learning-monorepo-poc/onboarding-101").then(m => ({ Module: m.Module })),
-  "security-basics": () => import("@learning-monorepo-poc/security-basics").then(m => ({ Module: m.Module })),
+  "math-basics": () => import("@learning-monorepo-poc/math-basics").then(m => ({ Module: m.Module })),
 };
 

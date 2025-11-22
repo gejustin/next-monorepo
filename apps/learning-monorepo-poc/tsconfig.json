@@ -55,10 +55,7 @@
       "path": "../../libs/ui"
     },
     {
-      "path": "../../modules/security-basics"
-    },
-    {
-      "path": "../../modules/onboarding-101"
+      "path": "../../modules/math-basics"
     },
     {
       "path": "../../libs/learning-core"

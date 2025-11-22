@@ -8,14 +8,9 @@ import { Button } from "@learning-monorepo-poc/ui";
 export default function HomePage() {
   const modules = [
     {
-      slug: "onboarding-101",
-      title: "Onboarding 101",
-      description: "Get started with the basics of our platform and workflow.",
-    },
-    {
-      slug: "security-basics",
-      title: "Security Basics",
-      description: "Learn fundamental security practices and best practices.",
+      slug: "math-basics",
+      title: "Math Basics",
+      description: "Get started with the basics of math.",
     },
   ];
 

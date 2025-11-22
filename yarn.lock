@@ -2161,6 +2161,12 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@learning-monorepo-poc/math-basics@workspace:modules/math-basics":
+  version: 0.0.0-use.local
+  resolution: "@learning-monorepo-poc/math-basics@workspace:modules/math-basics"
+  languageName: unknown
+  linkType: soft
+
 "@learning-monorepo-poc/onboarding-101@workspace:modules/onboarding-101":
   version: 0.0.0-use.local
   resolution: "@learning-monorepo-poc/onboarding-101@workspace:modules/onboarding-101"

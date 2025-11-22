@@ -13,13 +13,10 @@
       "path": "./libs/learning-core"
     },
     {
-      "path": "./modules/security-basics"
-    },
-    {
-      "path": "./modules/onboarding-101"
-    },
-    {
       "path": "./tools/workspace"
+    },
+    {
+      "path": "./modules/math-basics"
     }
   ]
 }

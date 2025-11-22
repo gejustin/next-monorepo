@@ -15,10 +15,11 @@ import { ClientModule } from "./client-module";
  */
 export async function Module() {
   // Example of server-side work:
-  // const config = await getProjectConfig("onboarding-101");
-  // const data = await fetchModuleData("onboarding-101");
+  // const config = await getProjectConfig("math-basics");
+  // const data = await fetchModuleData("math-basics");
 
   // Contract: no props from the route.
   // All data fetching happens here on the server.
   return <ClientModule />;
 }
+
