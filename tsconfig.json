@@ -17,6 +17,12 @@
     },
     {
       "path": "./modules/math-basics"
+    },
+    {
+      "path": "./modules/abcs"
+    },
+    {
+      "path": "./modules/shapes"
     }
   ]
 }

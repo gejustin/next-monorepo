@@ -20,5 +20,7 @@ import type { ComponentType } from "react";
  */
 export const moduleRegistry: Record<string, () => Promise<{ Module: ComponentType }>> = {
   "math-basics": () => import("@learning-monorepo-poc/math-basics").then(m => ({ Module: m.Module })),
+  "abcs": () => import("@learning-monorepo-poc/abcs").then(m => ({ Module: m.Module })),
+  "shapes": () => import("@learning-monorepo-poc/shapes").then(m => ({ Module: m.Module })),
 };
 

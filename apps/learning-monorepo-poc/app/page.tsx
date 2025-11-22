@@ -12,20 +12,20 @@ export default function HomePage() {
       duration: "2 hours"
     },
     {
-      slug: "introduction-to-react",
-      title: "React Fundamentals",
-      description: "Learn modern web development with React server components.",
-      icon: <CodeIcon />,
-      difficulty: "Intermediate",
-      duration: "4 hours"
+      slug: "abcs",
+      title: "Learn ABCs",
+      description: "Master the alphabet with fun interactive flashcards.",
+      icon: <AbcIcon />,
+      difficulty: "Beginner",
+      duration: "30 mins"
     },
     {
-      slug: "system-design",
-      title: "System Design",
-      description: "Architect scalable distributed systems and microservices.",
-      icon: <ServerIcon />,
-      difficulty: "Advanced",
-      duration: "6 hours"
+      slug: "shapes",
+      title: "World of Shapes",
+      description: "Explore circles, squares, and triangles in this interactive guide.",
+      icon: <ShapesIcon />,
+      difficulty: "Beginner",
+      duration: "45 mins"
     }
   ];
 
@@ -125,22 +125,19 @@ function MathIcon() {
   );
 }
 
-function CodeIcon() {
+function AbcIcon() {
   return (
     <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-      <polyline points="16 18 22 12 16 6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-      <polyline points="8 6 2 12 8 18" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+      <path d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
     </svg>
   );
 }
 
-function ServerIcon() {
+function ShapesIcon() {
   return (
     <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-      <rect x="2" y="2" width="20" height="8" rx="2" ry="2" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-      <rect x="2" y="14" width="20" height="8" rx="2" ry="2" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-      <line x1="6" y1="6" x2="6.01" y2="6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-      <line x1="6" y1="18" x2="6.01" y2="18" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+      <rect x="3" y="3" width="18" height="18" rx="2" ry="2" strokeWidth="2" />
+      <circle cx="12" cy="12" r="5" strokeWidth="2" />
     </svg>
   );
 }

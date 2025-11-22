@@ -2145,6 +2145,12 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@learning-monorepo-poc/abcs@workspace:modules/abcs":
+  version: 0.0.0-use.local
+  resolution: "@learning-monorepo-poc/abcs@workspace:modules/abcs"
+  languageName: unknown
+  linkType: soft
+
 "@learning-monorepo-poc/learning-core@workspace:libs/learning-core":
   version: 0.0.0-use.local
   resolution: "@learning-monorepo-poc/learning-core@workspace:libs/learning-core"
@@ -2164,6 +2170,12 @@ __metadata:
 "@learning-monorepo-poc/math-basics@workspace:modules/math-basics":
   version: 0.0.0-use.local
   resolution: "@learning-monorepo-poc/math-basics@workspace:modules/math-basics"
+  languageName: unknown
+  linkType: soft
+
+"@learning-monorepo-poc/shapes@workspace:modules/shapes":
+  version: 0.0.0-use.local
+  resolution: "@learning-monorepo-poc/shapes@workspace:modules/shapes"
   languageName: unknown
   linkType: soft
 

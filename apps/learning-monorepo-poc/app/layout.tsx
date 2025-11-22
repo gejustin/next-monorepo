@@ -13,7 +13,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="flex h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
+      <body className="flex h-screen bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-300">
         <Sidebar />
         <div className="flex-1 flex flex-col ml-64">
           <Topbar />

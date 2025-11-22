@@ -55,6 +55,12 @@
       "path": "../../libs/ui"
     },
     {
+      "path": "../../modules/shapes"
+    },
+    {
+      "path": "../../modules/abcs"
+    },
+    {
       "path": "../../modules/math-basics"
     },
     {
