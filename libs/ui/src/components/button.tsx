@@ -18,9 +18,9 @@ export function Button({
   const baseStyles = "inline-flex items-center justify-center rounded-md font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 disabled:pointer-events-none disabled:opacity-50";
 
   const variantStyles = {
-    default: "bg-blue-600 text-white hover:bg-blue-700",
-    outline: "border border-gray-300 bg-white hover:bg-gray-50 hover:text-gray-900",
-    ghost: "hover:bg-gray-100 hover:text-gray-900",
+    default: "bg-blue-600 text-white hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600",
+    outline: "border border-gray-300 bg-white hover:bg-gray-50 hover:text-gray-900 dark:border-gray-600 dark:bg-transparent dark:text-gray-100 dark:hover:bg-gray-800",
+    ghost: "hover:bg-gray-100 hover:text-gray-900 dark:text-gray-100 dark:hover:bg-gray-800",
   };
 
   const sizeStyles = {
@@ -38,4 +38,3 @@ export function Button({
     </button>
   );
 }
-

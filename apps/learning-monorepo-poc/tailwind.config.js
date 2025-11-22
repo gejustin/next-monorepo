@@ -16,8 +16,11 @@ module.exports = {
     '!./{src,pages,components,app}/**/*.{stories,spec}.{ts,tsx,js,jsx,html}',
     '../../libs/**/*.{ts,tsx,js,jsx,html}',
     '!../../libs/**/*.{stories,spec}.{ts,tsx,js,jsx,html}',
+    '../../modules/**/*.{ts,tsx,js,jsx,html}',
+    '!../../modules/**/*.{stories,spec}.{ts,tsx,js,jsx,html}',
 //     ...createGlobPatternsForDependencies(__dirname)
   ],
+  darkMode: 'class',
   theme: {
     extend: {},
   },

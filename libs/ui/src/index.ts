@@ -3,3 +3,6 @@
 export { Card } from "./components/card";
 export { Button } from "./components/button";
 export { Navigation } from "./components/navigation";
+export { Sidebar } from "./components/sidebar";
+export { Topbar } from "./components/topbar";
+export { ThemeToggle } from "./components/theme-toggle";

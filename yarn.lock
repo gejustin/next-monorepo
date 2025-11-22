@@ -2167,18 +2167,6 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@learning-monorepo-poc/onboarding-101@workspace:modules/onboarding-101":
-  version: 0.0.0-use.local
-  resolution: "@learning-monorepo-poc/onboarding-101@workspace:modules/onboarding-101"
-  languageName: unknown
-  linkType: soft
-
-"@learning-monorepo-poc/security-basics@workspace:modules/security-basics":
-  version: 0.0.0-use.local
-  resolution: "@learning-monorepo-poc/security-basics@workspace:modules/security-basics"
-  languageName: unknown
-  linkType: soft
-
 "@learning-monorepo-poc/source@workspace:.":
   version: 0.0.0-use.local
   resolution: "@learning-monorepo-poc/source@workspace:."
