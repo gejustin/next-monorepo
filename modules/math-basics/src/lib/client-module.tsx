@@ -1,7 +1,7 @@
 "use client";
 
 import { Card, Button } from "@learning-monorepo-poc/ui";
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 
 // --- Types ---
 
@@ -100,9 +100,13 @@ const LESSONS: Lesson[] = [
 
 function VisualAid({ count, symbol }: { count: number; symbol: string }) {
   return (
-    <div className="flex flex-wrap gap-1 justify-center">
+    <div className="flex flex-wrap gap-2 justify-center p-2">
       {Array.from({ length: count }).map((_, i) => (
-        <span key={i} className="text-2xl">
+        <span
+          key={i}
+          className="text-3xl transform hover:scale-125 transition-transform duration-200 cursor-default animate-in zoom-in fade-in fill-mode-backwards"
+          style={{ animationDelay: `${i * 50}ms` }}
+        >
           {symbol}
         </span>
       ))}
@@ -110,27 +114,55 @@ function VisualAid({ count, symbol }: { count: number; symbol: string }) {
   );
 }
 
+function ProgressBar({ current, total, label }: { current: number; total: number; label: string }) {
+  const progress = Math.round((current / total) * 100);
+  return (
+    <div className="w-full mb-6">
+      <div className="flex justify-between text-sm font-medium text-slate-500 mb-2">
+        <span>{label}</span>
+        <span>
+          {current} / {total}
+        </span>
+      </div>
+      <div className="h-2 bg-slate-100 rounded-full overflow-hidden">
+        <div
+          className="h-full bg-gradient-to-r from-blue-500 to-indigo-600 transition-all duration-500 ease-out rounded-full"
+          style={{ width: `${progress}%` }}
+        />
+      </div>
+    </div>
+  );
+}
+
 function WelcomeView({ onStart }: { onStart: () => void }) {
   return (
-    <Card className="p-8 max-w-2xl mx-auto text-center">
-      <h1 className="text-4xl font-bold mb-6 text-blue-900">Arithmetic Trainer</h1>
-      <p className="text-xl text-gray-600 mb-8 leading-relaxed">
-        Master the basics of addition and subtraction! <br />
-        We'll start with some quick lessons, then test your skills with a quiz.
+    <Card className="p-8 md:p-12 max-w-2xl mx-auto text-center shadow-xl border-0 ring-1 ring-slate-900/5 rounded-3xl backdrop-blur-sm bg-white/90">
+      <div className="mb-8 inline-flex p-4 bg-blue-50 rounded-full text-5xl animate-bounce">
+        👋
+      </div>
+      <h1 className="text-4xl md:text-5xl font-black mb-6 text-slate-900 tracking-tight">
+        Arithmetic Trainer
+      </h1>
+      <p className="text-xl text-slate-600 mb-10 leading-relaxed max-w-lg mx-auto">
+        Master the basics of addition and subtraction! We'll start with simple lessons, then test your skills.
       </p>
 
-      <div className="grid grid-cols-2 gap-6 mb-10 max-w-sm mx-auto">
-        <div className="bg-blue-50 p-4 rounded-lg">
-          <span className="block text-3xl mb-2">➕</span>
-          <span className="font-semibold text-blue-700">Addition</span>
+      <div className="grid grid-cols-2 gap-4 md:gap-8 mb-12 max-w-md mx-auto">
+        <div className="group bg-gradient-to-br from-blue-50 to-indigo-50 p-6 rounded-2xl border border-blue-100 transition-all hover:shadow-md hover:-translate-y-1">
+          <span className="block text-4xl mb-3 group-hover:scale-110 transition-transform duration-200">➕</span>
+          <span className="font-bold text-blue-700 text-lg">Addition</span>
         </div>
-        <div className="bg-purple-50 p-4 rounded-lg">
-          <span className="block text-3xl mb-2">➖</span>
-          <span className="font-semibold text-purple-700">Subtraction</span>
+        <div className="group bg-gradient-to-br from-purple-50 to-pink-50 p-6 rounded-2xl border border-purple-100 transition-all hover:shadow-md hover:-translate-y-1">
+          <span className="block text-4xl mb-3 group-hover:scale-110 transition-transform duration-200">➖</span>
+          <span className="font-bold text-purple-700 text-lg">Subtraction</span>
         </div>
       </div>
 
-      <Button size="lg" onClick={onStart} className="w-full sm:w-auto px-12">
+      <Button
+        size="lg"
+        onClick={onStart}
+        className="w-full sm:w-auto px-12 py-6 text-lg rounded-full shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-200 bg-gradient-to-r from-blue-600 to-indigo-600 border-0 text-white font-bold"
+      >
         Start Learning
       </Button>
     </Card>
@@ -139,64 +171,79 @@ function WelcomeView({ onStart }: { onStart: () => void }) {
 
 function LessonView({ onComplete }: { onComplete: () => void }) {
   const [lessonStep, setLessonStep] = useState(0);
+  const [isAnimating, setIsAnimating] = useState(false);
   const lesson = LESSONS[lessonStep];
   const isLastLesson = lessonStep === LESSONS.length - 1;
 
+  useEffect(() => {
+    setIsAnimating(true);
+    const timer = setTimeout(() => setIsAnimating(false), 300);
+    return () => clearTimeout(timer);
+  }, [lessonStep]);
+
   return (
-    <Card className="p-8 max-w-2xl mx-auto">
-      <div className="mb-6 flex justify-between items-center text-sm text-gray-500">
-        <span>Lesson</span>
-        <span>
-          Step {lessonStep + 1} of {LESSONS.length}
-        </span>
+    <Card className="p-8 md:p-10 max-w-2xl mx-auto shadow-xl border-0 ring-1 ring-slate-900/5 rounded-3xl bg-white/95">
+      <ProgressBar current={lessonStep + 1} total={LESSONS.length} label="Lesson Progress" />
+
+      <div className={`transition-all duration-300 ${isAnimating ? 'opacity-50 translate-x-4' : 'opacity-100 translate-x-0'}`}>
+        <h2 className="text-3xl font-bold mb-3 text-slate-900">{lesson.title}</h2>
+        <p className="text-xl mb-8 text-slate-600 leading-relaxed">{lesson.text}</p>
+
+        <div className="bg-slate-50 border border-slate-100 p-8 rounded-2xl mb-8 flex flex-col items-center justify-center gap-8 shadow-inner">
+          <div className="flex items-center gap-6 text-5xl font-mono font-bold text-slate-800">
+            <span className="w-16 text-center">{lesson.a}</span>
+            <span className="text-blue-500">{lesson.op === "addition" ? "+" : "-"}</span>
+            <span className="w-16 text-center">{lesson.b}</span>
+            <span className="text-slate-400">=</span>
+            <span className="text-indigo-600 w-16 text-center">?</span>
+          </div>
+
+          <div className="flex items-center gap-4 md:gap-8 w-full justify-center">
+            <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-100 min-w-[100px] flex justify-center items-center">
+              <VisualAid count={lesson.a} symbol={lesson.visual} />
+            </div>
+            <span className="text-3xl text-slate-300 font-bold">
+              {lesson.op === "addition" ? "+" : "-"}
+            </span>
+            <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-100 min-w-[100px] flex justify-center items-center">
+              <VisualAid count={lesson.b} symbol={lesson.visual} />
+            </div>
+          </div>
+
+          <div className="text-center mt-2 p-4 bg-indigo-50 rounded-xl w-full border border-indigo-100">
+            <p className="text-lg font-medium text-indigo-900 mb-2">{lesson.explanation}</p>
+            <p className="text-3xl font-bold text-indigo-600">
+              Answer: {lesson.op === "addition" ? lesson.a + lesson.b : lesson.a - lesson.b}
+            </p>
+          </div>
+        </div>
       </div>
 
-      <h2 className="text-3xl font-bold mb-4 text-blue-600">{lesson.title}</h2>
-      <p className="text-xl mb-8 text-gray-700">{lesson.text}</p>
-
-      <div className="bg-gray-50 p-8 rounded-xl mb-8 flex flex-col items-center justify-center gap-6">
-        <div className="flex items-center gap-4 text-4xl font-mono font-bold text-gray-800">
-          <span>{lesson.a}</span>
-          <span>{lesson.op === "addition" ? "+" : "-"}</span>
-          <span>{lesson.b}</span>
-          <span>=</span>
-          <span className="text-blue-600">?</span>
-        </div>
-
-        <div className="flex items-center gap-8">
-          <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-100">
-            <VisualAid count={lesson.a} symbol={lesson.visual} />
-          </div>
-          {lesson.op === "addition" && <span className="text-2xl text-gray-400">+</span>}
-          {lesson.op === "subtraction" && <span className="text-2xl text-gray-400">-</span>}
-          <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-100">
-            <VisualAid count={lesson.b} symbol={lesson.visual} />
-          </div>
-        </div>
-
-        <div className="text-center mt-2">
-          <p className="text-lg font-medium text-gray-600">{lesson.explanation}</p>
-          <p className="text-2xl font-bold mt-2 text-blue-600">
-            Answer: {lesson.op === "addition" ? lesson.a + lesson.b : lesson.a - lesson.b}
-          </p>
-        </div>
-      </div>
-
-      <div className="flex justify-between items-center">
+      <div className="flex justify-between items-center pt-4 border-t border-slate-100">
         <Button
           variant="outline"
           onClick={() => setLessonStep((prev) => Math.max(0, prev - 1))}
           disabled={lessonStep === 0}
+          className="rounded-full px-6 border-slate-200 hover:bg-slate-50 text-slate-600"
         >
           Previous
         </Button>
 
         {isLastLesson ? (
-          <Button onClick={onComplete} size="lg" className="bg-green-600 hover:bg-green-700 text-white">
-            Ready for Quiz?
+          <Button
+            onClick={onComplete}
+            size="lg"
+            className="rounded-full px-8 bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white shadow-lg hover:shadow-green-200 font-bold"
+          >
+            Start Quiz! 🚀
           </Button>
         ) : (
-          <Button onClick={() => setLessonStep((prev) => prev + 1)}>Next Lesson</Button>
+          <Button
+            onClick={() => setLessonStep((prev) => prev + 1)}
+            className="rounded-full px-8 bg-slate-900 hover:bg-slate-800 text-white shadow-md"
+          >
+            Next Lesson
+          </Button>
         )}
       </div>
     </Card>
@@ -224,8 +271,6 @@ function QuizView({
   selectedAnswer,
   isLastQuestion,
 }: QuizViewProps) {
-  // Generate simple multiple choice options
-  // Memoize options so they don't shuffle on re-render
   const options = useMemo(() => {
     const correct = question.correctAnswer;
     const opts = new Set<number>([correct]);
@@ -239,32 +284,29 @@ function QuizView({
   }, [question.id, question.correctAnswer]);
 
   return (
-    <Card className="p-8 max-w-2xl mx-auto">
-      <div className="mb-6 flex justify-between items-center text-sm text-gray-500">
-        <span>Quiz Mode</span>
-        <span>
-          Question {index + 1} of {total}
-        </span>
-      </div>
+    <Card className="p-8 md:p-10 max-w-2xl mx-auto shadow-xl border-0 ring-1 ring-slate-900/5 rounded-3xl bg-white/95">
+      <ProgressBar current={index + 1} total={total} label="Quiz Progress" />
 
-      <div className="text-center mb-12">
-        <div className="text-6xl font-mono font-bold text-gray-800 mb-8">
-          {question.a} {question.op === "addition" ? "+" : "-"} {question.b} = ?
+      <div className="text-center mb-10 animate-in slide-in-from-right-8 fade-in duration-300">
+        <div className="text-6xl md:text-7xl font-mono font-bold text-slate-800 mb-12 tracking-wider">
+          {question.a} <span className="text-blue-500">{question.op === "addition" ? "+" : "-"}</span> {question.b} <span className="text-slate-300">=</span> <span className="text-indigo-600">?</span>
         </div>
 
-        <div className="grid grid-cols-2 gap-4 max-w-md mx-auto">
+        <div className="grid grid-cols-2 gap-4 md:gap-6 max-w-lg mx-auto">
           {options.map((opt) => {
             let variant: "default" | "outline" = "outline";
-            let className = "text-xl py-8";
+            let className = "text-2xl py-8 rounded-2xl transition-all duration-200 border-2";
 
             if (showFeedback) {
               if (opt === question.correctAnswer) {
-                className += " bg-green-100 border-green-500 text-green-700 hover:bg-green-100";
+                className += " bg-green-50 border-green-500 text-green-700 hover:bg-green-50 ring-4 ring-green-100";
               } else if (opt === selectedAnswer) {
-                className += " bg-red-100 border-red-500 text-red-700 hover:bg-red-100";
+                className += " bg-red-50 border-red-500 text-red-700 hover:bg-red-50 opacity-50";
               } else {
-                className += " opacity-50";
+                className += " opacity-30 border-slate-100";
               }
+            } else {
+              className += " border-slate-200 hover:border-blue-400 hover:bg-blue-50 hover:text-blue-700 hover:shadow-md hover:-translate-y-1";
             }
 
             return (
@@ -283,23 +325,28 @@ function QuizView({
       </div>
 
       {showFeedback && (
-        <div className="animate-in fade-in slide-in-from-bottom-4 duration-300">
+        <div className="animate-in zoom-in fade-in slide-in-from-bottom-4 duration-300 flex flex-col items-center">
           <div
-            className={`p-4 rounded-lg text-center mb-6 ${
-              selectedAnswer === question.correctAnswer ? "bg-green-50 text-green-800" : "bg-red-50 text-red-800"
+            className={`px-8 py-4 rounded-2xl text-center mb-8 shadow-sm border ${
+              selectedAnswer === question.correctAnswer
+                ? "bg-green-50 border-green-100 text-green-800"
+                : "bg-red-50 border-red-100 text-red-800"
             }`}
           >
-            <p className="font-bold text-lg">
+            <p className="font-bold text-xl flex items-center gap-2">
               {selectedAnswer === question.correctAnswer
-                ? "Correct! 🎉"
-                : `Not quite. The answer is ${question.correctAnswer}.`}
+                ? <><span>🎉</span> Correct! Great job!</>
+                : <><span>😕</span> Not quite. The answer is {question.correctAnswer}.</>
+              }
             </p>
           </div>
-          <div className="flex justify-center">
-            <Button onClick={onNext} size="lg">
-              {isLastQuestion ? "Finish Quiz" : "Next Question"}
-            </Button>
-          </div>
+          <Button
+            onClick={onNext}
+            size="lg"
+            className="rounded-full px-10 py-6 text-lg shadow-xl hover:shadow-2xl hover:scale-105 transition-all bg-slate-900 text-white font-bold"
+          >
+            {isLastQuestion ? "See Results 🏆" : "Next Question ➡️"}
+          </Button>
         </div>
       )}
     </Card>
@@ -317,33 +364,52 @@ interface ResultsViewProps {
 
 function ResultsView({ score, correctCount, totalCount, passed, onRetry, onReview }: ResultsViewProps) {
   return (
-    <Card className="p-8 max-w-2xl mx-auto text-center">
-      <h2 className="text-3xl font-bold mb-6">Quiz Complete!</h2>
+    <Card className="p-10 md:p-12 max-w-2xl mx-auto text-center shadow-2xl border-0 ring-1 ring-slate-900/5 rounded-3xl bg-white relative overflow-hidden">
+      {passed && (
+        <div className="absolute inset-0 pointer-events-none opacity-10 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-yellow-300 via-transparent to-transparent" />
+      )}
 
-      <div className="mb-8">
-        <div className="text-6xl font-bold mb-2 text-blue-600">{score}%</div>
-        <p className="text-xl text-gray-600">
-          You got {correctCount} out of {totalCount} correct.
+      <div className="mb-8 relative">
+        <div className="text-8xl mb-4 animate-bounce">
+          {passed ? "🏆" : "💪"}
+        </div>
+        <h2 className="text-4xl font-black mb-2 text-slate-900">
+          {passed ? "You Did It!" : "Good Try!"}
+        </h2>
+        <p className="text-xl text-slate-500">
+          {passed ? "You're a math wizard!" : "Keep practicing, you'll get it!"}
         </p>
       </div>
 
-      {passed ? (
-        <div className="bg-green-50 p-6 rounded-xl mb-8">
-          <p className="text-2xl font-bold text-green-700 mb-2">You Passed! 🏆</p>
-          <p className="text-green-800">Great job mastering addition and subtraction!</p>
+      <div className="bg-slate-50 rounded-3xl p-8 mb-10 border border-slate-100">
+        <div className="text-7xl font-black mb-2 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-600">
+          {score}%
         </div>
-      ) : (
-        <div className="bg-yellow-50 p-6 rounded-xl mb-8">
-          <p className="text-2xl font-bold text-yellow-700 mb-2">Almost there!</p>
-          <p className="text-yellow-800">You need 80% to pass. Keep practicing!</p>
+        <div className="h-3 bg-slate-200 rounded-full overflow-hidden max-w-xs mx-auto mb-4">
+          <div
+            className={`h-full transition-all duration-1000 ease-out rounded-full ${passed ? 'bg-green-500' : 'bg-yellow-500'}`}
+            style={{ width: `${score}%` }}
+          />
         </div>
-      )}
+        <p className="text-xl font-medium text-slate-600">
+          You got <span className={passed ? "text-green-600" : "text-yellow-600"}>{correctCount}</span> out of {totalCount} correct
+        </p>
+      </div>
 
-      <div className="flex justify-center gap-4">
-        <Button variant="outline" onClick={onReview}>
+      <div className="flex flex-col sm:flex-row justify-center gap-4">
+        <Button
+          variant="outline"
+          onClick={onReview}
+          className="rounded-full px-8 py-4 text-lg border-2 hover:bg-slate-50"
+        >
           Review Lessons
         </Button>
-        <Button onClick={onRetry}>Try Again</Button>
+        <Button
+          onClick={onRetry}
+          className="rounded-full px-8 py-4 text-lg bg-blue-600 hover:bg-blue-700 text-white shadow-lg hover:shadow-blue-200"
+        >
+          Try Again ↺
+        </Button>
       </div>
     </Card>
   );
@@ -409,8 +475,8 @@ export function ClientModule() {
   }, [quizQuestions, answers]);
 
   return (
-    <div className="min-h-screen bg-gray-50 p-4 md:p-8 font-sans">
-      <div className="max-w-4xl mx-auto">
+    <div className="min-h-screen bg-slate-50 p-4 md:p-8 font-sans flex items-center justify-center bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px]">
+      <div className="w-full max-w-4xl mx-auto">
         {phase === "welcome" && <WelcomeView onStart={() => setPhase("lesson")} />}
 
         {phase === "lesson" && <LessonView onComplete={startQuiz} />}
