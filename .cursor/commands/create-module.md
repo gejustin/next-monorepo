@@ -1,4 +1,4 @@
-# Create Module Content
+# Create Module
 
 Helps non-engineers scaffold a new module and generate content using AI.
 
@@ -11,7 +11,7 @@ Use this command to create a new module and implement its content. The command w
 When invoked, follow these steps:
 
 1. **Get the module name from the user**
-   - Extract the module name from the command (e.g., `/create-module-content my-module`)
+   - Extract the module name from the command (e.g., `/create-module my-module`)
    - If not provided, ask: "What is the name of the module you want to create?"
 
 2. **Check if the module already exists**
@@ -80,7 +80,7 @@ When invoked, follow these steps:
 ## Example Workflow
 
 ```
-User: /create-module-content math-basics. Create an interactive calculator
+User: /create-module math-basics. Create an interactive calculator
 
 1. Extract module name: "math-basics"
 2. Check if exists → doesn't exist
