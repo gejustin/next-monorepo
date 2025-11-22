@@ -2215,6 +2215,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@learning-monorepo-poc/workspace@workspace:tools/workspace"
   dependencies:
+    "@nx/devkit": "npm:22.1.0"
     tslib: "npm:^2.3.0"
   languageName: unknown
   linkType: soft
