@@ -17,6 +17,9 @@
     },
     {
       "path": "./modules/onboarding-101"
+    },
+    {
+      "path": "./tools/workspace"
     }
   ]
 }
