@@ -23,6 +23,9 @@
     },
     {
       "path": "./modules/shapes"
+    },
+    {
+      "path": "./modules/typescript-basics"
     }
   ]
 }
