@@ -1,0 +1,5 @@
+{
+  "startCommand": "yarn dev",
+  "previewUrl": "http://localhost:3000",
+  "ignore": ["**/node_modules/**", "**/.next/**"]
+}
