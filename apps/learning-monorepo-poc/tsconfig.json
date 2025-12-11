@@ -55,6 +55,9 @@
       "path": "../../libs/ui"
     },
     {
+      "path": "../../modules/typescript-basics"
+    },
+    {
       "path": "../../modules/shapes"
     },
     {
